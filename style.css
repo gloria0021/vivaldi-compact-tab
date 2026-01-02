@@ -1,0 +1,317 @@
+/* -------------------------------------------------- */
+/* 1) VARIABLES & BASIC SETUP                         */
+/* -------------------------------------------------- */
+:root {
+    --tiny-radius: 7px;
+}
+
+/* Remove default tab styling */
+.tab,
+.tab.active,
+.tab .tab-bg,
+.tab.active .tab-bg {
+    background: none !important;
+    box-shadow: none !important;
+    clip-path: none !important;
+    mask-image: none !important;
+    border-radius: var(--tiny-radius) !important;
+}
+
+.tab-border {
+    border-radius: var(--tiny-radius) !important;
+    mask-image: none !important;
+    clip-path: none !important;
+}
+
+/* -------------------------------------------------- */
+/* 2) VERTICAL TABBAR LAYOUT                          */
+/* -------------------------------------------------- */
+#tabs-tabbar-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    padding-top: 10px;
+}
+
+.sync-and-trash-container {
+    padding-block: 0.5rem;
+}
+
+/* -------------------------------------------------- */
+/* 3) GRID LAYOUT                                     */
+/* -------------------------------------------------- */
+#tabs-container[aria-orientation="vertical"] [role="tablist"] {
+    margin-top: 8px;
+    margin-bottom: 4px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(2rem, 1fr));
+    grid-auto-rows: min-content;
+    gap: 0.24rem;
+    padding-inline: 0.1rem;
+    overflow-y: auto;
+}
+
+/* Default tabs span full width */
+#tabs-container[aria-orientation="vertical"] [role="tablist"]>span {
+    grid-column: 1 / -1;
+    display: block;
+    background: none !important;
+    border: none !important;
+    border-radius: var(--tiny-radius) !important;
+    margin: 0 !important;
+}
+
+/* -------------------------------------------------- */
+/* Dynamic Height Fix                                 */
+/* -------------------------------------------------- */
+#tabs-container .resize {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: auto !important;
+    flex-grow: 0 !important;
+}
+
+/* -------------------------------------------------- */
+/* 4) PINNED TABS                                     */
+/* -------------------------------------------------- */
+#tabs-container[aria-orientation="vertical"] [role="tablist"]>span:has(.is-pinned) {
+    grid-column: auto !important;
+}
+
+.is-pinned .title {
+    display: none !important;
+}
+
+.is-pinned .tab-header {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100% !important;
+    color: #eaeaea !important;
+    font-size: 14px !important;
+}
+
+.is-pinned .tab-wrapper {
+    background: rgba(136, 135, 141, 0.2) !important;
+    border: none !important;
+    border-radius: var(--tiny-radius) !important;
+    padding: 0.3rem !important;
+}
+
+#tabs-container[aria-orientation="vertical"] .tab-position.is-pinned .tab-wrapper.active {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.is-pinned:hover .tab-wrapper {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* -------------------------------------------------- */
+/* 5) REGULAR TABS                                    */
+/* -------------------------------------------------- */
+.tab-position {
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+    transform: none !important;
+    height: 2rem;
+}
+
+.tab-position.is-pinned {
+    height: auto !important;
+    min-height: min-content !important;
+}
+
+.tab-position:not(.is-pinned) .title {
+    color: #ffffff !important;
+}
+
+.tab .tab-header .title {
+    flex-grow: 1;
+    padding: 0.2rem !important;
+    filter: none !important;
+}
+
+.tab-wrapper {
+    margin: 0 !important;
+    max-height: none !important;
+    border: none !important;
+    border-radius: var(--tiny-radius) !important;
+}
+
+#tabs-container[aria-orientation="vertical"] .tab-position:not(.is-pinned) .tab-wrapper.active {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+#tabs-container[aria-orientation="vertical"] .tab-position:not(.is-pinned):hover .tab-wrapper {
+    background: rgba(255, 255, 255, 0.098) !important;
+}
+
+/* -------------------------------------------------- */
+/* 6) CLEANUP & AUTO-HIDE TAB BAR                     */
+/* -------------------------------------------------- */
+.button-badge {
+    display: none !important;
+}
+
+.button-toolbar.newtab {
+    top: auto !important;
+    left: auto !important;
+}
+
+.auto-hide-wrapper.left {
+    position: fixed !important;
+    z-index: 5000 !important;
+    left: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) translateX(-95%) !important;
+    opacity: 0 !important;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out !important;
+
+    height: 88vh !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: hidden !important;
+    border-radius: 0 8px 8px 0 !important;
+
+    backdrop-filter: blur(8px) !important;
+    background-color: rgba(60, 50, 50, 0.5) !important;
+
+    width: auto !important;
+}
+
+.auto-hide-wrapper.left:hover {
+    transform: translateY(-50%) translateX(0) !important;
+    opacity: 1 !important;
+}
+
+#tabbar-wrapper {
+    height: auto !important;
+    max-height: 100% !important;
+}
+
+button[name="WorkspaceButton"],
+button[name="PanelBookmarks"],
+button[name="NewTab"],
+.button-toolbar,
+.zoom-percent {
+    color: #ffffff !important;
+}
+
+.auto-hide-wrapper .button-toolbar {
+    opacity: 1 !important;
+}
+
+.separator {
+    width: 0px !important;
+}
+
+/* -------------------------------------------------- */
+/* 7) AUTO-HIDE TOP BAR ANIMATION                     */
+/* -------------------------------------------------- */
+.mainbar {
+    background: transparent !important;
+}
+
+.toolbar-mainbar {
+    background-color: rgba(10, 0, 0, 0.6) !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+}
+
+.UrlBar-AddressField {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+    color: #ffffff !important;
+}
+
+.auto-hide-wrapper.top {
+    display: flex !important;
+    flex-direction: column !important;
+
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 9000 !important;
+
+    opacity: 0 !important;
+    transform: translateY(-100%) !important;
+    pointer-events: none !important;
+
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease-out !important;
+}
+
+.auto-hide-wrapper.top.show {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+}
+
+/* ===================================================== */
+/* 8) WEB PANEL HEADER FIX                               */
+/* ===================================================== */
+
+#switch {
+    background-color: rgba(10, 0, 0, 0.25) !important;
+    backdrop-filter: blur(8px) !important;
+    border: none !important;
+}
+
+#panels-container .panel-group {
+    background-color: rgba(10, 0, 0, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    border: none !important;
+}
+
+.window-buttongroup,
+.window-buttongroup button {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+.webpanel-header {
+    background-color: rgba(10, 0, 0, 0.25) !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    z-index: 10 !important;
+}
+
+.panels-container {
+    background-color: rgba(10, 0, 0, 0.25) !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    z-index: 10 !important;
+}
+
+.Panels {
+    background-color: rgba(10, 0, 0, 0.25) !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    z-index: 10 !important;
+}
+
+.webpanel {
+    background-color: rgba(10, 0, 0, 0.25) !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    z-index: 10 !important;
+}
+
+.webpanel-header * {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.webpanel-header .webpanel-title {
+    color: #ececec !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    opacity: 1 !important;
+}
