@@ -4,8 +4,8 @@ A CSS theme that turns the Vivaldi sidebar tabs into a tiled grid layout, design
 
 **Want a workspace experience like ZenBrowser?**
 
+<video src="tmp/demo.mp4" controls width="100%"></video>
 
-<video controls src="tmp/demo.mp4" title="Demo Video" width="100%"></video>
 
 
 ## 📋 Requirements
