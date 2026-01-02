@@ -4,13 +4,7 @@ A CSS theme that turns the Vivaldi sidebar tabs into a tiled grid layout, design
 
 **Want a workspace experience like ZenBrowser?**
 
-<video src="tmp/demo.mp4" controls width="100%"></video>
-
-
 https://github.com/user-attachments/assets/c2087913-fe9e-46e7-8c01-f9737cb7d4fd
-
-
-
 
 ## 📋 Requirements
 Available in **[Snapshot 3899.3](https://vivaldi.com/blog/desktop/daily-images-autohide-toolbars-smarter-tab-tiling-vivaldi-browser-snapshot-3899-3/)** or later.
