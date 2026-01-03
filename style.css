@@ -250,6 +250,11 @@ button[name="NewTab"],
     pointer-events: auto !important;
 }
 
+.ExtensionIcon,
+.ExtensionToggleIcon.ExtensionToggleIcon--Expanded {
+    background: transparent !important;
+}
+
 /* ===================================================== */
 /* 8) WEB PANEL HEADER FIX                               */
 /* ===================================================== */
@@ -272,30 +277,9 @@ button[name="NewTab"],
     background: transparent !important;
 }
 
-.webpanel-header {
-    background-color: rgba(10, 0, 0, 0.25) !important;
-    backdrop-filter: blur(8px) !important;
-    box-shadow: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    z-index: 10 !important;
-}
-
-.panels-container {
-    background-color: rgba(10, 0, 0, 0.25) !important;
-    backdrop-filter: blur(8px) !important;
-    box-shadow: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    z-index: 10 !important;
-}
-
-.Panels {
-    background-color: rgba(10, 0, 0, 0.25) !important;
-    backdrop-filter: blur(8px) !important;
-    box-shadow: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    z-index: 10 !important;
-}
-
+.webpanel-header,
+.panels-container,
+.Panels,
 .webpanel {
     background-color: rgba(10, 0, 0, 0.25) !important;
     backdrop-filter: blur(8px) !important;
