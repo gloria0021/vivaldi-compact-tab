@@ -118,6 +118,9 @@
     overflow-x: hidden;
     transform: none !important;
     height: 2rem;
+    display: flex !important;
+    align-items: center !important;
+    /* Vertically center tab label */
 }
 
 .tab-position.is-pinned {
@@ -202,7 +205,8 @@
     min-height: max-content !important;
     max-height: none !important;
     overflow: visible !important;
-    margin-bottom: 0 !important;
+    margin-bottom: 10px !important;
+    /* Add spacing before new tab button */
     contain: none !important;
     width: 100% !important;
     min-width: 100% !important;
@@ -227,16 +231,15 @@
     display: none !important;
 }
 
-/* Apply negative margin to pull the new tab button up */
+/* New tab button toolbar - add spacing from tabs */
 #tabs-container.left .toolbar-tabbar {
     display: flex !important;
     justify-content: center !important;
     position: relative !important;
     z-index: 50 !important;
-    margin-top: 0 !important;
-    /* Reset margin */
+    margin-top: 10px !important;
+    /* 10px spacing from tabs */
     transform: none !important;
-    /* Reset transform */
     height: 34px !important;
     flex-shrink: 0 !important;
     width: 100% !important;
