@@ -42,14 +42,21 @@
 /* 3) GRID LAYOUT                                     */
 /* -------------------------------------------------- */
 #tabs-container[aria-orientation="vertical"] [role="tablist"] {
-    margin-top: 8px;
-    margin-bottom: 4px;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(2rem, 1fr));
+    margin-top: 8px !important;
+    /* Lock to prevent fluctuation */
+    margin-bottom: 4px !important;
+    display: grid !important;
+    /* Use fixed column widths to prevent resizing based on container */
+    grid-template-columns: repeat(3, 1fr) !important;
     grid-auto-rows: min-content;
     gap: 0.24rem;
-    padding-inline: 0.1rem;
-    overflow-y: auto;
+    padding-inline: 12px !important;
+    /* Add 12px horizontal spacing */
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
+    /* Lock the width so it doesn't change */
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 /* Default tabs span full width */
@@ -63,14 +70,9 @@
 }
 
 /* -------------------------------------------------- */
-/* Dynamic Height Fix                                 */
+/* Dynamic Height Fix - REMOVED conflicting rule      */
+/* See section 6 for unified .resize handling         */
 /* -------------------------------------------------- */
-#tabs-container .resize {
-    height: auto !important;
-    min-height: auto !important;
-    max-height: auto !important;
-    flex-grow: 0 !important;
-}
 
 /* -------------------------------------------------- */
 /* 4) PINNED TABS                                     */
@@ -149,15 +151,120 @@
 }
 
 /* -------------------------------------------------- */
-/* 6) CLEANUP & AUTO-HIDE TAB BAR                     */
+/* 6) CLEANUP, AUTO-HIDE & LAYOUT FIX                 */
 /* -------------------------------------------------- */
+
+#tabs-container.left {
+    justify-content: flex-start !important;
+    /* Disable scroll here to prevent width changes - parent handles scroll */
+    overflow: visible !important;
+    height: auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    /* Reset padding to let children control spacing */
+}
+
+/*
+   CRITICAL FIX: Disable scroll on ALL internal wrappers
+   to prevent premature scrolling when tabs are few.
+   Let the main container handle scrolling.
+   Also lock width to prevent layout shifts.
+   NOTE: tablist is excluded to preserve its horizontal padding.
+*/
+#tabs-container.left .resize,
+#tabs-container.left .tab-strip {
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    height: auto !important;
+    min-height: max-content !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin-bottom: 0 !important;
+    contain: none !important;
+    /* Lock width to prevent shifts */
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Separate rule for tablist - keep horizontal padding */
+#tabs-container.left div[role="tablist"],
+#tabs-container.left span[role="tablist"] {
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    height: auto !important;
+    min-height: max-content !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin-bottom: 0 !important;
+    contain: none !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    /* Apply 12px horizontal padding */
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+/* Hide variable spacers that Vivaldi might insert */
+#tabs-container.left .spacer,
+#tabs-container.left>div[style*="flex-grow: 1"],
+#tabs-container.left>div[class*="spacer"] {
+    display: none !important;
+    flex-grow: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+}
+
 .button-badge {
     display: none !important;
 }
 
-.button-toolbar.newtab {
+/* Apply negative margin to pull the new tab button up */
+#tabs-container.left .toolbar-tabbar {
+    display: flex !important;
+    justify-content: center !important;
+    position: relative !important;
+    z-index: 50 !important;
+    margin-top: 0 !important;
+    /* Reset margin */
+    transform: none !important;
+    /* Reset transform */
+    height: 34px !important;
+    flex-shrink: 0 !important;
+    width: 100% !important;
+    background: transparent !important;
+}
+
+#tabs-container.left .toolbar-tabbar .button-toolbar.newtab {
+    pointer-events: auto !important;
+    /* Re-enable clicks for the button */
     top: auto !important;
     left: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 30px !important;
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: inherit !important;
+    background: transparent !important;
+}
+
+/* Ensure SVG icon is visible */
+#tabs-container.left .toolbar-tabbar .button-toolbar.newtab svg {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .auto-hide-wrapper.left {
@@ -187,8 +294,24 @@
 }
 
 #tabbar-wrapper {
-    height: auto !important;
+    height: 100% !important;
     max-height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    /* Hide scrollbar but keep scroll functionality */
+    scrollbar-width: none !important;
+    /* Firefox */
+    -ms-overflow-style: none !important;
+    /* IE/Edge */
+}
+
+/* Hide scrollbar for Chrome/Safari/Vivaldi */
+#tabbar-wrapper::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
 }
 
 button[name="WorkspaceButton"],
