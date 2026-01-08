@@ -2,9 +2,7 @@
 
 A CSS theme that turns the Vivaldi sidebar tabs into a tiled grid layout, designed to work seamlessly with the AutoHide feature.
 
-**Want a workspace experience like ZenBrowser?**
-
-https://github.com/user-attachments/assets/c2087913-fe9e-46e7-8c01-f9737cb7d4fd
+https://github.com/user-attachments/assets/a32eddab-f824-4d78-988c-c7d760792e7c
 
 ## 📋 Requirements
 Available in **[Snapshot 3899.3](https://vivaldi.com/blog/desktop/daily-images-autohide-toolbars-smarter-tab-tiling-vivaldi-browser-snapshot-3899-3/)** or later.
